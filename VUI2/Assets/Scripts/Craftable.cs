@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(ItemData))]
+[RequireComponent(typeof(ItemObject))]
 public class Craftable : MonoBehaviour {
 
-    public GameObject collidingObject;
-    public ItemData itemData;
+    [HideInInspector] public GameObject collidingObject;
+    [HideInInspector] public ItemObject itemObject;
 
     void Start()
     {
-        itemData = GetComponent<ItemData>();
+        itemObject = GetComponent<ItemObject>();
     }
 
     public virtual void Craft()

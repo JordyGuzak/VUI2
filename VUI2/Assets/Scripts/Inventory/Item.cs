@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 public class Item {
 
-    public Sprite Sprite { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public int Amount { get; set; }
+    public Sprite Sprite;
+    public string Title;
+    public string Description;
+    public int Amount;
     public bool Stackable;
 
     public Item()
@@ -19,5 +20,10 @@ public class Item {
         Description = description;
         Amount = amount;
         Stackable = stackable;
+    }
+
+    public Item Copy()
+    {
+        return new Item(Sprite, Title, Description, Amount, Stackable);
     }
 }

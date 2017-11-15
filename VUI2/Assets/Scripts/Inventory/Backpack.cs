@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Backpack : MonoBehaviour {
 
-
     public SteamVR_TrackedObject trackedObject;
 
-    private ItemData currentItemData = null;
+    private ItemObject currentItemObject = null;
 
     private bool inventoryOpen = false;
 
@@ -22,21 +19,12 @@ public class Backpack : MonoBehaviour {
 
     void Update()
     {
-        if (!currentItemData) return;
+        if (!currentItemObject) return;
 
         if (Controller.GetHairTriggerUp())
         {
-            EventManager.Instance.Invoke(
-                new PickUpItemEvent(
-                new Item(
-                    currentItemData.sprite,
-                    currentItemData.title,
-                    currentItemData.description,
-                    currentItemData.amount,
-                    currentItemData.stackable
-                )));
-
-            Destroy(currentItemData.gameObject);
+            EventManager.Instance.Invoke(new PickUpItemEvent(currentItemObject.GetItem()));
+            Destroy(currentItemObject.gameObject);
         }
     }
 
@@ -52,23 +40,23 @@ public class Backpack : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if (!currentItemData)
+        if (!currentItemObject)
         {
             return;
         }
 
-        currentItemData = null;
+        currentItemObject = null;
     }
 
     void SetItemData(Collider col)
     {
-        if (currentItemData || !col.GetComponent<Rigidbody>())
+        if (currentItemObject || !col.GetComponent<Rigidbody>())
         {
             return;
         }
 
-        ItemData itemData = col.GetComponent<ItemData>();
+        ItemObject itemObject = col.GetComponent<ItemObject>();
 
-        if (itemData) currentItemData = itemData;
+        if (itemObject) currentItemObject = itemObject;
     }
 }

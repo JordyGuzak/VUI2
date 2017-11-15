@@ -25,7 +25,7 @@ public class CraftManager : Singleton<CraftManager> {
 
                 if (craftableB)
                 {
-                    GameObject gobj = Craft(craftableA.itemData.GetItem(), craftableB.itemData.GetItem());
+                    GameObject gobj = Craft(craftableA.itemObject.GetItem(), craftableB.itemObject.GetItem());
 
                     if (gobj)
                     {
