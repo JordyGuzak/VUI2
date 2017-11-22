@@ -8,6 +8,14 @@ TagManager:
   - projectile
   - Item
   - Raw Material
+  - Cubes
+  - Spheres
+  - Leg
+  - Arm
+  - Saucers
+  - Torso
+  - OtherSaucers
+  - Construction
   layers:
   - Default
   - TransparentFX
