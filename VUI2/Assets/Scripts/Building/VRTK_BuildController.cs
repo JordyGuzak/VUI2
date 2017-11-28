@@ -92,7 +92,8 @@ public class VRTK_BuildController : MonoBehaviour {
             Destroy(currentPreview);
 
         currentPreview = Instantiate(selectedBuildObject.preview, targetPos, Quaternion.identity);
-        SetLayerRecursively(currentPreview, LayerMask.NameToLayer("Preview"));
+        //SetLayerRecursively(currentPreview, LayerMask.NameToLayer("Preview"));
+        currentPreview.layer = LayerMask.NameToLayer("Preview");
     }
 
     void UpdatePreview()
@@ -105,10 +106,8 @@ public class VRTK_BuildController : MonoBehaviour {
 
     void UpdateTargetPosition()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, maxBuildDistance, ~(1 << currentPreview.layer)))
+        if (Physics.Raycast(events.transform.position, events.transform.forward, out hit, maxBuildDistance, ~(1 << currentPreview.layer)))
         {
             targetPos = hit.point;
         }
@@ -121,7 +120,8 @@ public class VRTK_BuildController : MonoBehaviour {
 
     void Build(GameObject obj, Vector3 pos, Quaternion rot, Transform parent = null)
     {
-        SetLayerRecursively(Instantiate(obj, pos, rot, parent), LayerMask.NameToLayer("Building"));
+        GameObject newStructure = Instantiate(obj, pos, rot, parent);
+        newStructure.layer = LayerMask.NameToLayer("Building");
     }
 
     void SetLayerRecursively(GameObject obj, int layer)
