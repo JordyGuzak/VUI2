@@ -5,7 +5,6 @@ using UnityEngine;
 public class SnapZone : MonoBehaviour {
 
     public GameObject highlightPrefab;
-
     private GameObject highlightObject;
 
     private void OnTriggerEnter(Collider other)
@@ -27,7 +26,7 @@ public class SnapZone : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == highlightObject)
+        if (highlightObject != null)
             Destroy(highlightObject);
     }
 }

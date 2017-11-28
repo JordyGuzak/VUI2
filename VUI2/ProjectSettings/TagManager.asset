@@ -17,6 +17,7 @@ TagManager:
   - OtherSaucers
   - Construction
   - Axe
+  - SnapZone
   layers:
   - Default
   - TransparentFX

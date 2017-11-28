@@ -21,10 +21,11 @@ GameObject:
   - component: {fileID: 4715005177732954}
   - component: {fileID: 33445932190420254}
   - component: {fileID: 23541994119789742}
+  - component: {fileID: 65568606990693268}
+  - component: {fileID: 54172912402357644}
   - component: {fileID: 114248542678756256}
   - component: {fileID: 114883899849014968}
   - component: {fileID: 114021847283350706}
-  - component: {fileID: 54172912402357644}
   m_Layer: 0
   m_Name: log
   m_TagString: Untagged
@@ -101,6 +102,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65568606990693268
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1524003618556854}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.29999998, y: 1.0000001, z: 0.30372363}
+  m_Center: {x: 0, y: 0.00000002980233, z: 0.15201825}
 --- !u!114 &114021847283350706
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -13,7 +13,7 @@ public class VRTK_BuildController : MonoBehaviour {
     private int selectedIndex = 0;
     private GameObject currentPreview;
     private Vector3 targetPos;
-    private Vector3 offset = Vector3.zero;
+    private Transform targetSnapZone = null;
 
     protected virtual void Awake()
     {
@@ -50,7 +50,8 @@ public class VRTK_BuildController : MonoBehaviour {
 
     private void DoTriggerClicked(object sender, ControllerInteractionEventArgs e)
     {
-        Build(selectedBuildObject.prefab, targetPos, currentPreview.transform.rotation);
+        Vector3 buildPos = targetSnapZone != null ? targetSnapZone.position : targetPos;
+        Build(selectedBuildObject.prefab, buildPos, currentPreview.transform.rotation);
     }
 
     private void Update()
@@ -110,6 +111,12 @@ public class VRTK_BuildController : MonoBehaviour {
         if (Physics.Raycast(events.transform.position, events.transform.forward, out hit, maxBuildDistance, ~(1 << currentPreview.layer)))
         {
             targetPos = hit.point;
+            targetSnapZone = null;
+
+            if (hit.transform.tag.Equals("SnapZone"))
+            {
+                targetSnapZone = hit.transform;
+            }
         }
     }
 
