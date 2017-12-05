@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class TreeController : MonoBehaviour {
 
+	public AudioClip[] audioClips;
     public GameObject log;
     public GameObject woodImpact;
     public Transform impactSpawnPoint;
 
     private int treeHealth = 10;
+	private SoundEffect sound;
     
 	// Use this for initialization
 	void Start () {
-		
+		sound = new SoundEffect (audioClips);
 	}
 	
 	// Update is called once per frame
@@ -32,6 +34,9 @@ public class TreeController : MonoBehaviour {
             Instantiate(woodImpact, collision.contacts[0].point, Quaternion.Inverse(impactSpawnPoint.transform.rotation));
             
             treeHealth--;
+
+			//Play random sound
+			sound.PlayRand();
 
             if (treeHealth <= 0)
             {
