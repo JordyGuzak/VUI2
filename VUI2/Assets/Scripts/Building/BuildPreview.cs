@@ -24,6 +24,8 @@ public class BuildPreview : MonoBehaviour {
             {
                 SetMaterial(red);
             }
+
+            EventManager.Instance.Invoke(new CanBuildChangedEvent(this, canBuild));
         }
     }
 
