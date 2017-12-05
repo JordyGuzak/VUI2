@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TreeController : MonoBehaviour {
 
-	public AudioClip[] audioClips;
     public GameObject log;
     public GameObject woodImpact;
 
@@ -14,7 +13,7 @@ public class TreeController : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
-		sound = new SoundEffect (audioClips);
+        sound = GetComponent<SoundEffect>();
 	}
 	
 	// Update is called once per frame

@@ -2,25 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SoundEffect : MonoBehaviour {
 
-	private AudioClip[] audioClips;
-	private AudioSource[] audioSources;
+	public AudioClip[] audioClips;
+	private AudioSource audioSource;
 
-	public SoundEffect (AudioClip[] clips){
-		audioClips = clips;
 
-		for (int i = 0; i < clips.Length; i++) {
-			audioSources [i] = gameObject.AddComponent<AudioSource>();
-			audioSources [i].clip = audioClips [i];
-			audioSources [i].volume = 0;
-			audioSources [i].loop = false;
-		}
-	}
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
-	public void PlayRand(){
+    public void PlayRand(){
+        if (audioClips.Length < 1) return;
+
 		int option = Random.Range (0, audioClips.Length);
-		audioSources [option].volume = 3;
-		audioSources [option].Play ();
+        audioSource.clip = audioClips[option];
+        audioSource.Play();
 	}
 }
