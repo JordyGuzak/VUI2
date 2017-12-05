@@ -104,7 +104,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4142338214653642}
-  - component: {fileID: 95524218574934606}
   m_Layer: 0
   m_Name: FirePlace
   m_TagString: Untagged
@@ -809,23 +808,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1753406312991410}
   m_Mesh: {fileID: 4300002, guid: a9afbc069c28efb41989fc6dc1b671af, type: 3}
---- !u!95 &95524218574934606
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472620992710144}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a9afbc069c28efb41989fc6dc1b671af, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &108662621542210262
 Light:
   m_ObjectHideFlags: 1

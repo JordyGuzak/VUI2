@@ -35,23 +35,6 @@ public class SnapZone : MonoBehaviour {
     protected VRTK_BaseHighlighter objectHighlighter;
     protected bool isHighlighted = false;
 
-    /// <summary>
-    /// Emitted when a valid interactable object enters the snap drop zone trigger collider.
-    /// </summary>
-    public event SnapZoneEventHandler ObjectEnteredSnapZone;
-    /// <summary>
-    /// Emitted when a valid interactable object exists the snap drop zone trigger collider.
-    /// </summary>
-    public event SnapZoneEventHandler ObjectExitedSnapZone;
-    /// <summary>
-    /// Emitted when an interactable object is successfully snapped into a drop zone.
-    /// </summary>
-    public event SnapZoneEventHandler ObjectSnappedToZone;
-    /// <summary>
-    /// Emitted when an interactable object is removed from a snapped drop zone.
-    /// </summary>
-    public event SnapZoneEventHandler ObjectUnsnappedFromZone;
-
     protected const string HIGHLIGHT_CONTAINER_NAME = "HighlightContainer";
     protected const string HIGHLIGHT_OBJECT_NAME = "HighlightObject";
     protected const string HIGHLIGHT_EDITOR_OBJECT_NAME = "EditorHighlightObject";
@@ -66,12 +49,15 @@ public class SnapZone : MonoBehaviour {
 
     private void OnEnable()
     {
-        ObjectEnteredSnapZone += new SnapZoneEventHandler(DoObjectEnteredSnapZone);
+        //ObjectEnteredSnapZone += new SnapZoneEventHandler(DoObjectEnteredSnapZone);
+
+
+
     }
 
     private void OnDisable()
     {
-        ObjectEnteredSnapZone -= new SnapZoneEventHandler(DoObjectEnteredSnapZone);
+        //ObjectEnteredSnapZone -= new SnapZoneEventHandler(DoObjectEnteredSnapZone);
     }
 
     protected virtual void Update()
@@ -143,21 +129,21 @@ public class SnapZone : MonoBehaviour {
     }
 
 
-    public virtual void OnObjectEnteredSnapZone(SnapZoneEventArgs e)
-    {
-        if (ObjectEnteredSnapZone != null)
-        {
-            ObjectEnteredSnapZone(this, e);
-        }
-    }
+    //public virtual void OnObjectEnteredSnapZone(SnapZoneEventArgs e)
+    //{
+    //    if (ObjectEnteredSnapZone != null)
+    //    {
+    //        ObjectEnteredSnapZone(this, e);
+    //    }
+    //}
 
-    public virtual void OnObjectExitedSnapZone(SnapZoneEventArgs e)
-    {
-        if (ObjectExitedSnapZone != null)
-        {
-            ObjectExitedSnapZone(this, e);
-        }
-    }
+    //public virtual void OnObjectExitedSnapZone(SnapZoneEventArgs e)
+    //{
+    //    if (ObjectExitedSnapZone != null)
+    //    {
+    //        ObjectExitedSnapZone(this, e);
+    //    }
+    //}
 
     public virtual SnapZoneEventArgs SetSnapDropZoneEvent(GameObject interactableObject)
     {
@@ -176,7 +162,8 @@ public class SnapZone : MonoBehaviour {
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Preview"))
         {
-            OnObjectEnteredSnapZone(SetSnapDropZoneEvent(other.gameObject));
+            //OnObjectEnteredSnapZone(SetSnapDropZoneEvent(other.gameObject));
+            EventManager.Instance.Invoke(new SnapZoneEnterEvent(this, other.gameObject));
         }
     }
 
@@ -192,6 +179,8 @@ public class SnapZone : MonoBehaviour {
     {
         if (highlightObject != null)
             Destroy(highlightObject);
+
+        EventManager.Instance.Invoke(new SnapZoneExitEvent(this, other.gameObject));
     }
 
     protected virtual void CheckPrefabUpdate()
