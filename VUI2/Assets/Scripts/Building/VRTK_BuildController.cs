@@ -13,7 +13,19 @@ public class VRTK_BuildController : MonoBehaviour {
     private int selectedIndex = 0;
     private GameObject currentPreview;
     private Vector3 targetPos;
-    private Transform targetSnapZone = null;
+    private SnapZone snapZone = null;
+
+    
+
+    /// <summary>
+    /// Emitted when a valid interactable object enters the snap drop zone trigger collider.
+    /// </summary>
+    public event SnapZoneEventHandler ObjectEnteredSnapZone;
+
+    /// <summary>
+    /// Emitted when a valid interactable object exists the snap drop zone trigger collider.
+    /// </summary>
+    public event SnapZoneEventHandler ObjectExitedSnapZone;
 
     protected virtual void Awake()
     {
@@ -41,17 +53,34 @@ public class VRTK_BuildController : MonoBehaviour {
         {
             events.TriggerClicked += new ControllerInteractionEventHandler(DoTriggerClicked);
         }
+
+        ObjectEnteredSnapZone += new SnapZoneEventHandler(DoObjectEnteredSnapDropZone);
+        ObjectExitedSnapZone += new SnapZoneEventHandler(DoObjectExitedSnapZone);
     }
 
     protected virtual void OnDisable()
     {
-        events.TriggerClicked -= new ControllerInteractionEventHandler(DoTriggerClicked);
+        if (events != null) events.TriggerClicked -= new ControllerInteractionEventHandler(DoTriggerClicked);
+
+        ObjectEnteredSnapZone -= new SnapZoneEventHandler(DoObjectEnteredSnapDropZone);
+        ObjectExitedSnapZone -= new SnapZoneEventHandler(DoObjectExitedSnapZone);
     }
 
     private void DoTriggerClicked(object sender, ControllerInteractionEventArgs e)
     {
-        Vector3 buildPos = targetSnapZone != null ? targetSnapZone.position : targetPos;
+        Vector3 buildPos = snapZone != null ? snapZone.transform.position : targetPos;
         Build(selectedBuildObject.prefab, buildPos, currentPreview.transform.rotation);
+    }
+
+    private void DoObjectEnteredSnapDropZone(object sender, SnapZoneEventArgs e)
+    {
+        SnapZone sz = e.snappedObject.GetComponent<SnapZone>();
+        if (sz) snapZone = sz;
+    }
+
+    private void DoObjectExitedSnapZone(object sender, SnapZoneEventArgs e)
+    {
+        if (snapZone != null) snapZone = null;
     }
 
     private void Update()
@@ -111,12 +140,6 @@ public class VRTK_BuildController : MonoBehaviour {
         if (Physics.Raycast(events.transform.position, events.transform.forward, out hit, maxBuildDistance, ~(1 << currentPreview.layer)))
         {
             targetPos = hit.point;
-            targetSnapZone = null;
-
-            if (hit.transform.tag.Equals("SnapZone"))
-            {
-                targetSnapZone = hit.transform;
-            }
         }
     }
 
