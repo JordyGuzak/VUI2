@@ -6,8 +6,8 @@ public class TreeController : MonoBehaviour {
 
     public GameObject log;
     public GameObject woodImpact;
-    public Transform impactSpawnPoint;
 
+    private Transform impactSpawnPoint;
     private int treeHealth = 10;
     
 	// Use this for initialization
@@ -35,12 +35,10 @@ public class TreeController : MonoBehaviour {
 
             if (treeHealth <= 0)
             {
-                Instantiate(log, transform.position + (Vector3.up ), Quaternion.identity);
-                Instantiate(log, transform.position + (Vector3.up * 2f), Quaternion.identity);
-                Instantiate(log, transform.position + (Vector3.up * 3f), Quaternion.identity);
+                Instantiate(log, transform.position + (Vector3.up), Quaternion.identity).GetComponent<Rigidbody>().AddForceAtPosition((Vector3.up * 10f), impactSpawnPoint.position);
+                Instantiate(log, transform.position + (Vector3.up * 2f), Quaternion.identity).GetComponent<Rigidbody>().AddForceAtPosition((Vector3.up * 10f), impactSpawnPoint.position);
+                Instantiate(log, transform.position + (Vector3.up * 3f), Quaternion.identity).GetComponent<Rigidbody>().AddForceAtPosition((Vector3.up * 10f), impactSpawnPoint.position);
                 Destroy(transform.gameObject);
-
-                
             }
         }
         
