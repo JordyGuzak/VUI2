@@ -2,11 +2,12 @@
 using UnityEngine;
 using VRTK;
 
-public class VRTK_BuildTouchController : MonoBehaviour {
+[RequireComponent(typeof(VRTK_BuildController))]
+public class VRTK_BuildTouchController : MonoBehaviour
+{
 
     public VRTK_ControllerEvents events;
-
-    //public List<RadialMenuButton> buttons;
+    public VRTK_BuildController buildController;
 
     protected float currentAngle; //Keep track of angle for when we click
     protected bool touchpadTouched;
@@ -30,6 +31,8 @@ public class VRTK_BuildTouchController : MonoBehaviour {
         {
             events = GetComponentInParent<VRTK_ControllerEvents>();
         }
+
+        buildController = GetComponentInParent<VRTK_BuildController>();
     }
 
     protected virtual void OnEnable()
@@ -64,7 +67,7 @@ public class VRTK_BuildTouchController : MonoBehaviour {
     }
 
     protected virtual void DoUnClickButton(object sender = null)
-    {;
+    {
     }
 
     protected virtual void DoShowMenu(float initialAngle, object sender = null)
@@ -72,17 +75,9 @@ public class VRTK_BuildTouchController : MonoBehaviour {
         DoChangeAngle(initialAngle); // Needed to register initial touch position before the touchpad axis actually changes
     }
 
-    protected virtual void DoHideMenu(bool force, object sender = null)
-    {
-//menu.StopTouching();
-    // menu.HideMenu(force);
-    }
-
     protected virtual void DoChangeAngle(float angle, object sender = null)
     {
         currentAngle = angle;
-
-     //   menu.HoverButton(currentAngle);
     }
 
     protected virtual void AttemptHapticPulse(float strength)
@@ -106,13 +101,13 @@ public class VRTK_BuildTouchController : MonoBehaviour {
     protected virtual void DoTouchpadTouched(object sender, ControllerInteractionEventArgs e)
     {
         touchpadTouched = true;
-        DoShowMenu(CalculateAngle(e));
+        InteractButton(CalculateAngle(e), ButtonEvent.hoverOn);
+        //DoShowMenu(CalculateAngle(e));
     }
 
     protected virtual void DoTouchpadUntouched(object sender, ControllerInteractionEventArgs e)
     {
         touchpadTouched = false;
-        DoHideMenu(false);
     }
 
     //Touchpad finger moved position
@@ -128,10 +123,31 @@ public class VRTK_BuildTouchController : MonoBehaviour {
     protected virtual void InteractButton(float angle, ButtonEvent evt) //Can't pass ExecuteEvents as parameter? Unity gives error
     {
         //Get button ID from angle
-      //  float buttonAngle = 360f / buttons.Count; //Each button is an arc with this angle
-      //  angle = VRTK_SharedMethods.Mod((angle + -offsetRotation), 360); //Offset the touch coordinate with our offset
+        float buttonAngle = 360f / 4; //Each button is an arc with this angle
+        angle = VRTK_SharedMethods.Mod(angle, 360); //Offset the touch coordinate with our offset
 
-      //  int buttonID = (int)VRTK_SharedMethods.Mod(((angle + (buttonAngle / 2f)) / buttonAngle), buttons.Count); //Convert angle into ButtonID (This is the magic)
+        int buttonID = (int)VRTK_SharedMethods.Mod(((angle + (buttonAngle / 2f)) / buttonAngle), 4); //Convert angle into ButtonID (This is the magic)
+
+        if (evt == ButtonEvent.hoverOn)
+        {
+            switch (buttonID)
+            {
+                case 0:
+                    buildController.SelectNextBuildObject();
+                    break;
+                case 1:
+                    buildController.RotatePreviewCounterClockWise();
+                    break;
+                case 2:
+                    buildController.SelectPreviousBuildObject();
+                    break;
+                case 3:
+                    buildController.RotatePreviewClockWise();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     protected virtual float CalculateAngle(ControllerInteractionEventArgs e)

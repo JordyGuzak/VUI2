@@ -174,9 +174,14 @@ public class VRTK_BuildController : MonoBehaviour {
         }
     }
 
-    void RotatePreview()
+    public void RotatePreviewClockWise()
     {
         currentPreview.transform.Rotate(new Vector3(0, 90, 0));
+    }
+
+    public void RotatePreviewCounterClockWise()
+    {
+        currentPreview.transform.Rotate(new Vector3(0, -90, 0));
     }
 
     void Build(GameObject obj, Vector3 pos, Quaternion rot, Transform parent = null)
