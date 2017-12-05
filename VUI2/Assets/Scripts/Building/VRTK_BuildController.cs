@@ -14,6 +14,7 @@ public class VRTK_BuildController : MonoBehaviour {
     private GameObject currentPreview;
     private Vector3 targetPos;
     private SnapZone snapZone = null;
+    private bool canBuild = true;
 
 
     /// <summary>
@@ -38,7 +39,7 @@ public class VRTK_BuildController : MonoBehaviour {
             events = GetComponentInParent<VRTK_ControllerEvents>();
         }
 
-        SelectBuildObject(selectedIndex);
+        //if (!currentPreview) SelectBuildObject(selectedIndex);
     }
 
     protected virtual void OnEnable()
@@ -58,10 +59,16 @@ public class VRTK_BuildController : MonoBehaviour {
 
         EventManager.Instance.AddListener<SnapZoneEnterEvent>(OnSnapZoneEnterEvent);
         EventManager.Instance.AddListener<SnapZoneExitEvent>(OnSnapZoneExitEvent);
+        EventManager.Instance.AddListener<CanBuildChangedEvent>(OnCanBuildChangedEvent);
+
+        if (!currentPreview) SelectBuildObject(selectedIndex);
     }
+
 
     protected virtual void OnDisable()
     {
+        if (currentPreview) Destroy(currentPreview);
+
         if (events != null) events.TriggerClicked -= new ControllerInteractionEventHandler(DoTriggerClicked);
 
         //ObjectEnteredSnapZone -= new SnapZoneEventHandler(DoObjectEnteredSnapDropZone);
@@ -69,6 +76,7 @@ public class VRTK_BuildController : MonoBehaviour {
 
         EventManager.Instance.RemoveListener<SnapZoneEnterEvent>(OnSnapZoneEnterEvent);
         EventManager.Instance.RemoveListener<SnapZoneExitEvent>(OnSnapZoneExitEvent);
+        EventManager.Instance.RemoveListener<CanBuildChangedEvent>(OnCanBuildChangedEvent);
     }
 
     private void OnSnapZoneEnterEvent(SnapZoneEnterEvent e)
@@ -82,10 +90,14 @@ public class VRTK_BuildController : MonoBehaviour {
         //if (snapZone != null) snapZone = null;
     }
 
+    private void OnCanBuildChangedEvent(CanBuildChangedEvent e)
+    {
+        canBuild = e.CanBuild;
+    }
+
 
     private void DoTriggerClicked(object sender, ControllerInteractionEventArgs e)
     {
-        Debug.Log(snapZone);
         Vector3 buildPos = snapZone != null ? snapZone.transform.position : targetPos;
         Build(selectedBuildObject.prefab, buildPos, currentPreview.transform.rotation);
     }
@@ -169,6 +181,8 @@ public class VRTK_BuildController : MonoBehaviour {
 
     void Build(GameObject obj, Vector3 pos, Quaternion rot, Transform parent = null)
     {
+        if (!canBuild) return;
+
         GameObject newStructure = Instantiate(obj, pos, rot, parent);
         newStructure.layer = LayerMask.NameToLayer("Building");
     }
