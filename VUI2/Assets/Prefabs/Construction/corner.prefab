@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114871419156654344}
   m_Layer: 0
   m_Name: SnapZone (3)
-  m_TagString: Untagged
+  m_TagString: SnapZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114715876265811126}
   m_Layer: 0
   m_Name: SnapZone (1)
-  m_TagString: Untagged
+  m_TagString: SnapZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,9 +59,6 @@ GameObject:
   - component: {fileID: 23384179795835480}
   - component: {fileID: 54379205417427564}
   - component: {fileID: 65041430754262348}
-  - component: {fileID: 114708510795266582}
-  - component: {fileID: 114395952634605830}
-  - component: {fileID: 114674201674596142}
   m_Layer: 0
   m_Name: corner
   m_TagString: Construction
@@ -82,7 +79,7 @@ GameObject:
   - component: {fileID: 114122160085085170}
   m_Layer: 0
   m_Name: SnapZone (4)
-  m_TagString: Untagged
+  m_TagString: SnapZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +97,7 @@ GameObject:
   - component: {fileID: 114202643667237838}
   m_Layer: 0
   m_Name: SnapZone
-  m_TagString: Untagged
+  m_TagString: SnapZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +115,7 @@ GameObject:
   - component: {fileID: 114733802630826114}
   m_Layer: 0
   m_Name: SnapZone (2)
-  m_TagString: Untagged
+  m_TagString: SnapZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,7 +197,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1410264423423850}
   m_LocalRotation: {x: -0, y: -0, z: 2.4264697e-24, w: 1}
-  m_LocalPosition: {x: 0, y: 0.92, z: 0}
+  m_LocalPosition: {x: 0, y: 0.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4204222937813900}
@@ -360,10 +357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d504966a651d484bb5492edd5595ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjectPrefab: {fileID: 0}
-  displayDropZoneInEditor: 1
-  highlightAlwaysActive: 0
-  highlightColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114202643667237838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -375,70 +368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d504966a651d484bb5492edd5595ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjectPrefab: {fileID: 0}
-  displayDropZoneInEditor: 1
-  highlightAlwaysActive: 0
-  highlightColor: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &114395952634605830
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1247862901722362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3abaf4521bf2344ea21ed3020b98eb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenIdle: 1
-  touchHighlightColor: {r: 0.9862069, g: 1, b: 0, a: 0}
-  allowedTouchControllers: 0
-  ignoredColliders: []
-  isGrabbable: 1
-  holdButtonToGrab: 1
-  stayGrabbedOnTeleport: 1
-  validDrop: 1
-  grabOverrideButton: 0
-  allowedGrabControllers: 0
-  grabAttachMechanicScript: {fileID: 0}
-  secondaryGrabActionScript: {fileID: 0}
-  isUsable: 0
-  holdButtonToUse: 0
-  useOnlyIfGrabbed: 0
-  pointerActivatesUseAction: 0
-  useOverrideButton: 0
-  allowedUseControllers: 0
-  usingState: 0
---- !u!114 &114674201674596142
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1247862901722362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18055ba762aa3994f9c10208cd088bc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114708510795266582
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1247862901722362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8afa0b205791c9f4496bf2814aeac078, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  precisionGrab: 1
-  rightSnapHandle: {fileID: 0}
-  leftSnapHandle: {fileID: 0}
-  throwVelocityWithAttachDistance: 0
-  throwMultiplier: 1
-  onGrabCollisionDelay: 0
-  destroyImmediatelyOnThrow: 1
-  breakForce: 1500
 --- !u!114 &114715876265811126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -450,10 +379,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d504966a651d484bb5492edd5595ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjectPrefab: {fileID: 0}
-  displayDropZoneInEditor: 1
-  highlightAlwaysActive: 0
-  highlightColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114733802630826114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -465,10 +390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d504966a651d484bb5492edd5595ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjectPrefab: {fileID: 0}
-  displayDropZoneInEditor: 1
-  highlightAlwaysActive: 0
-  highlightColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114871419156654344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -480,10 +401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d504966a651d484bb5492edd5595ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjectPrefab: {fileID: 0}
-  displayDropZoneInEditor: 1
-  highlightAlwaysActive: 0
-  highlightColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!135 &135005409443480764
 SphereCollider:
   m_ObjectHideFlags: 1

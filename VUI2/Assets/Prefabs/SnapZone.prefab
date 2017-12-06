@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114276918738350976}
   m_Layer: 0
   m_Name: SnapZone
-  m_TagString: Untagged
+  m_TagString: SnapZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d504966a651d484bb5492edd5595ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightPrefab: {fileID: 0}
 --- !u!135 &135876488923928806
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -79,5 +78,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}

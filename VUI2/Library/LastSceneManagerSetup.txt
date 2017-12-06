@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Island.unity
+- path: Assets/Scenes/Test Scenes/VRTK.unity
   isLoaded: 1
   isActive: 1

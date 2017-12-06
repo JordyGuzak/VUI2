@@ -17,16 +17,6 @@ public class VRTK_BuildController : MonoBehaviour {
     private bool canBuild = true;
 
 
-    /// <summary>
-    /// Emitted when a valid interactable object enters the snap drop zone trigger collider.
-    /// </summary>
-    public event SnapZoneEventHandler ObjectEnteredSnapZone;
-
-    /// <summary>
-    /// Emitted when a valid interactable object exists the snap drop zone trigger collider.
-    /// </summary>
-    public event SnapZoneEventHandler ObjectExitedSnapZone;
-
     protected virtual void Awake()
     {
         Initialize();
@@ -57,8 +47,8 @@ public class VRTK_BuildController : MonoBehaviour {
         //ObjectEnteredSnapZone += new SnapZoneEventHandler(DoObjectEnteredSnapDropZone);
         //ObjectExitedSnapZone += new SnapZoneEventHandler(DoObjectExitedSnapZone);
 
-        EventManager.Instance.AddListener<SnapZoneEnterEvent>(OnSnapZoneEnterEvent);
-        EventManager.Instance.AddListener<SnapZoneExitEvent>(OnSnapZoneExitEvent);
+        //EventManager.Instance.AddListener<SnapZoneEnterEvent>(OnSnapZoneEnterEvent);
+        //EventManager.Instance.AddListener<SnapZoneExitEvent>(OnSnapZoneExitEvent);
         EventManager.Instance.AddListener<CanBuildChangedEvent>(OnCanBuildChangedEvent);
 
         if (!currentPreview) SelectBuildObject(selectedIndex);
@@ -74,8 +64,8 @@ public class VRTK_BuildController : MonoBehaviour {
         //ObjectEnteredSnapZone -= new SnapZoneEventHandler(DoObjectEnteredSnapDropZone);
         //ObjectExitedSnapZone -= new SnapZoneEventHandler(DoObjectExitedSnapZone);
 
-        EventManager.Instance.RemoveListener<SnapZoneEnterEvent>(OnSnapZoneEnterEvent);
-        EventManager.Instance.RemoveListener<SnapZoneExitEvent>(OnSnapZoneExitEvent);
+        //EventManager.Instance.RemoveListener<SnapZoneEnterEvent>(OnSnapZoneEnterEvent);
+        //EventManager.Instance.RemoveListener<SnapZoneExitEvent>(OnSnapZoneExitEvent);
         EventManager.Instance.RemoveListener<CanBuildChangedEvent>(OnCanBuildChangedEvent);
     }
 
@@ -107,11 +97,6 @@ public class VRTK_BuildController : MonoBehaviour {
     //    SnapZone sz = e.snappedObject.GetComponent<SnapZone>();
     //    if (sz) snapZone = sz;
     //}
-
-    private void DoObjectExitedSnapZone(object sender, SnapZoneEventArgs e)
-    {
-        if (snapZone != null) snapZone = null;
-    }
 
     private void Update()
     {
@@ -152,8 +137,8 @@ public class VRTK_BuildController : MonoBehaviour {
             Destroy(currentPreview);
 
         currentPreview = Instantiate(selectedBuildObject.preview, targetPos, Quaternion.identity);
-        //SetLayerRecursively(currentPreview, LayerMask.NameToLayer("Preview"));
-        currentPreview.layer = LayerMask.NameToLayer("Preview");
+        SetLayerRecursively(currentPreview, LayerMask.NameToLayer("Preview"));
+        //currentPreview.layer = LayerMask.NameToLayer("Preview");
     }
 
     void UpdatePreview()
@@ -190,6 +175,7 @@ public class VRTK_BuildController : MonoBehaviour {
 
         GameObject newStructure = Instantiate(obj, pos, rot, parent);
         newStructure.layer = LayerMask.NameToLayer("Building");
+        SetLayerRecursively(newStructure, LayerMask.NameToLayer("Building"));
     }
 
     void SetLayerRecursively(GameObject obj, int layer)
@@ -198,6 +184,7 @@ public class VRTK_BuildController : MonoBehaviour {
 
         foreach (Transform child in obj.transform)
         {
+            if (child.gameObject.tag.Equals("SnapZone")) return;
             SetLayerRecursively(child.gameObject, layer);
         }
     }

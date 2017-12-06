@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d7325dd5a1de23d439815628f058ce73
-timeCreated: 1511344251
+guid: 6cb0c3f6bd21cb7498f41e16b262dade
+timeCreated: 1512554413
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -15,7 +15,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: wood_log
-    second: {fileID: 2100000, guid: 40ba6e3ea3aa5f94f97ceeb3ed0370b6, type: 2}
+    second: {fileID: 2100000, guid: aea99b37ec3c33548bb833848757c1b3, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -68,7 +68,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2

@@ -10,6 +10,8 @@ public class TreeController : MonoBehaviour {
     private Transform impactSpawnPoint;
     private int treeHealth = 10;
 	private SoundEffect sound;
+
+    private bool colliding = false;
     
 	// Use this for initialization
 	void Start () {
@@ -23,13 +25,12 @@ public class TreeController : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.gameObject.tag.Equals("Axe")) {
+        if (collision.transform.gameObject.tag.Equals("Axe") && !colliding) {
             //Set the rotation of the prefab to the same as spawn point
             impactSpawnPoint = collision.transform;
             woodImpact.transform.rotation = impactSpawnPoint.transform.rotation;
 
             //Spawn the wood prefab
-
             Instantiate(woodImpact, collision.contacts[0].point, Quaternion.Inverse(impactSpawnPoint.transform.rotation));
             
             treeHealth--;
@@ -46,5 +47,21 @@ public class TreeController : MonoBehaviour {
             }
         }
         
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.transform.gameObject.tag.Equals("Axe"))
+        {
+            colliding = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.gameObject.tag.Equals("Axe"))
+        {
+            colliding = false;
+        }
     }
 }
