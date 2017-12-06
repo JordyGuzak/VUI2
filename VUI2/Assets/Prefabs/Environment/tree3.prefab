@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114069584594272580}
   - component: {fileID: 114062675486366576}
   - component: {fileID: 136335495823716076}
+  - component: {fileID: 54871795378098228}
   m_Layer: 0
   m_Name: tree3
   m_TagString: Untagged
@@ -87,6 +88,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1535708583622152}
   m_Mesh: {fileID: 4300000, guid: e0b58c6733b8c4249a7ee9f136500e39, type: 3}
+--- !u!54 &54871795378098228
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1535708583622152}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!82 &82519486229965008
 AudioSource:
   m_ObjectHideFlags: 1
